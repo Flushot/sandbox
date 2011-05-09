@@ -1,10 +1,10 @@
 all: fizzbuzz
 
-fizzbuzz: fizz.o
-	gcc driver.c fizz.o -o fizzbuzz
+fizzbuzz: fizzy.o fizzbuzz.c
+	gcc fizzbuzz.c fizzy.o -o fizzbuzz
 
-fizz.o:
-	nasm -f elf -l fizz.lst -w+orphan-labels -o fizz.o fizz.asm
+fizzy.o: fizzy.asm
+	nasm -f elf -l fizzy.lst -w+orphan-labels -o fizzy.o fizzy.asm
 
 clean:
-	rm -f *.o fizz.lst fizzbuzz
+	rm -f *.o *.lst fizzbuzz
