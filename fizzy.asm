@@ -84,7 +84,7 @@ do_number:
 	
 final:
 	cmp [ebp + 12], ecx	; loop until arg2: end
-	jge next
+	jg next
 	mov eax, [ebp - 4]	; return = fizz_c
 	
 	pop ebx			; restore (cdecl)
