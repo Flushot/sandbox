@@ -24,8 +24,9 @@ extern printf			; windows: _printf / linux: printf
 
 ; variables
 segment .data
-	fmt_s	db '%s', 13, 10, 0
-	fmt_i	db '%i', 13, 10, 0
+	fmt_s	db '%s', 0
+	fmt_i	db '%i', 0
+	newline	db 13, 10, 0
 	fizz	db 'fizz', 0
 	buzz	db 'buzz', 0
 
@@ -45,13 +46,19 @@ fizzy:			  	; windows: _fizzy / linux: fizzy
 
 next:
 	add ecx, 1		; add = .5 cycles, inc = 1 cycle
+
+do_fizz:
 	mov eax, ecx
 	mov bl, 3		; divisor
 	div bl			; div/8: ax /= bl (ah=remainder)
 ;	cmp ah, 0
 ;	jne buzz_test
 	test ah, ah 		; buzz_test if cx % 3 == 0
-	jz do_fizz
+	jnz do_buzz
+	add dword [ebp - 4], 1 	; ++fizz_c
+	mov eax, fmt_s
+	mov ebx, fizz
+	call puts		; fizz
 
 do_buzz:	
 	mov eax, ecx
@@ -63,12 +70,6 @@ do_buzz:
 	mov ebx, buzz
 	call puts		; buzz
 	jmp final
-
-do_fizz:
-	add dword [ebp - 4], 1 	; ++fizz_c
-	mov eax, fmt_s
-	mov ebx, fizz
-	call puts		; fizz
 
 do_number:
 	mov eax, ecx
@@ -83,6 +84,10 @@ do_number:
 	call puts		; #
 	
 final:
+	mov eax, newline
+	xor ebx, ebx
+	call puts		; \r\n
+	
 	cmp [ebp + 12], ecx	; loop until arg2: end
 	jg next
 	mov eax, [ebp - 4]	; return = fizz_c
