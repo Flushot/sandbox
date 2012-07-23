@@ -1,67 +1,56 @@
 /**
- * FizzBuzz
- * Useless assembly test app
- *
- * @version 1.5
- * @author Chris Lyon
+ * FizzBuzz v1.6 by Chris Lyon
+ * Useless test app for assembly POC
  */
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
 
-/**
-   Executes and displays fizzbuzz
+// Executes external fizz.asm -> fizzy(), which displays output to stdout.
+extern int fizzy(      // [ret] Number of "fizz" that occurred.
+            int start, // [in] Starting number (e.g. 0)
+            int end);  // [in] Ending number (e.g. 100)
 
-   @param[in] start Starting number
-   @param[out] end Ending number
-   @return Number of fizzes that occurred
- */
-extern int fizzy(int start, int end);
-
-/**
-   Displays command usage info
-
-   @param[in] exename Executable name (argv[0])
-   @return Error code to return to shell
- */
-int usage(char *exename) {
-  printf("usage: %s <start> <end>\n", exename);
-  return -1;
+// Show CLI usage syntax and exit.
+void usage(char *argv) { // [in] Arguments.
+  printf("usage: %s <start> <end>\n", argv[0]);
+  exit(1);
 }
 
-/**
-   Pluralizes a word
-
-   @param[in] count Count used to determine pluralization
-   @param[in] word Word to pluralize based on count
-   @return Pluralized word (must be free'd by caller)
- */
-char *pluralize(int count, char *word) {
+// Pluralize a single word.
+char *pluralize(    // [ret] Pluralized word (caller must free()) or 0 if error.
+      int count,    // [in] Counted instances of word (0 < singular < plural).
+      char *word) { // [in] Word to pluralize (e.g. "fish").
   int ilen = strlen(word);
+  
+  // Allocate pluralized buffer.
   char *plural = (char *)malloc(sizeof(char) * ilen + 2);
+  if (!plural) {
+    fprintf(stderr, "Out of memory!");
+    return 0;
+  }
+  
   strcpy(plural, word);
   if (count != 1 && word[ilen - 1] != 's')
-    strcat(plural, "s");
+    strcat(plural, "s"); // Append 's' if count != 1.
+
   return plural;
 }
 
-/**
-   Entry point
- */
+// Program entry point.
 int main(int argc, char **argv) {
-  // Get arguments
-  if (argc < 3)
-    return usage(argv[0]);
-  int start = atoi(argv[1]);
-  int end = atoi(argv[2]);
-  if (start <= 0 || end <= 0)
-    return usage(argv[0]);
+  // Get and validate arguments.
+  if (argc < 3) return usage(argv);
+  int start = atoi(argv[1]), end = atoi(argv[2]);
+  if (start <= 0 || end <= 0) return usage(argv);
 
-  // fizzbuzz
-  int fizz_c = fizzy(start, end);
+  // Invoke external assembly function.
+  int fizz_count = fizzy(start, end);
   
-  // Display number of fizzes
-  char *times = pluralize(fizz_c, "time");
-  printf("fizzed %i %s\n", fizz_c, times);
-  free(times);
+  // Display number of fizzes.
+  char *times = pluralize(fizz_count, "time");
+  if (times) {
+    printf("fizzed %i %s\n", fizz_count, times);
+    free(times);
+  }
 }
