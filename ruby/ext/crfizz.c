@@ -3,23 +3,19 @@
 #endif
 
 #include "ruby.h"
+#include "../../fizzy.h"
 
-static VALUE _module;
-
-/* Executes external fizz.asm -> fizzy(), which displays output to stdout. */
-extern int fizzy(      /* [ret] Number of "fizz" that occurred. */
-	    int start, /* [in] Starting number (e.g. 0) */
-            int end);  /* [in] Ending number (e.g. 100) */
-
-static VALUE fizzy_wrapper(VALUE self, VALUE start, VALUE end) {
+/* Wrapper function */
+static VALUE ruby_fizzy(VALUE self, VALUE start, VALUE end) {
   return INT2FIX(fizzy(NUM2INT(start), NUM2INT(end)));
 }
 
-/* Initialize and declare bindings */
+/* Initialize and bind */
+static VALUE _module;
 #ifdef WIN32
 _declspec(dllexport)
 #endif
 void Init_crfizz() {
   _module = rb_define_module("CRFizz");
-  rb_define_module_function(_module, "fizzy", fizzy_wrapper, 2);
+  rb_define_module_function(_module, "fizzy", ruby_fizzy, 2);
 }

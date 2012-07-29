@@ -23,3 +23,7 @@ test: all
 
 clean:
 	rm -f fizzy.o fizzy.lst
+	$(MAKE) -C c clean
+	$(MAKE) -C java clean
+	$(MAKE) -C net clean
+	$(MAKE) -C ruby clean

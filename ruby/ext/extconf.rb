@@ -1,3 +1,3 @@
 require 'mkmf'
-have_library('fizzy')
+#have_library('fizzy')
 create_makefile('crfizz')
