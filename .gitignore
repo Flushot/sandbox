@@ -3,8 +3,8 @@
 *.so
 *.log
 /*.lst
-/*.class
-/cfizz
-/nfizz
+/c/fizz
+/java/*.class
+/net/fizz
+/ruby/ext/Makefile
 /tmp
-/ruby/Makefile
