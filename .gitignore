@@ -1,3 +1,8 @@
-fizzy.o
-fizzy.lst
-fizzbuzz
+.DS_Store
+/*.o
+/*.so
+/*.lst
+/*.class
+/cfizz
+/nfizz
+
