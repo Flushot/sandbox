@@ -15,4 +15,4 @@ test: all
 	time ./fizz 1 5
 
 clean:
-	rm -f *.o *.so *.class
+	rm -f *.o *.so *.class JFizz.h

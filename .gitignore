@@ -5,6 +5,7 @@
 /*.lst
 /c/fizz
 /java/*.class
+/java/JFizz.h
 /net/fizz
 /ruby/ext/Makefile
 /tmp

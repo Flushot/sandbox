@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require './ext/crfizz'
+require './ext/cfizz'
 
 abort "usage: <start> <end>" if ARGV.length != 2
-fizz_count = CRFizz.fizzy(ARGV.shift.to_i, ARGV.shift.to_i)
+fizz_count = CFizz.fizzy(ARGV.shift.to_i, ARGV.shift.to_i)
 puts "fizzed #{fizz_count} times"
