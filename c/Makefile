@@ -1,5 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -O0 -g -ansi
+CFLAGS = -Wall -O0 -g -ansi -m32
+
+.PHONY: fizz test
 
 all: fizz
 
@@ -11,3 +13,4 @@ test: all
 
 clean:
 	rm -f *.o fizz
+	rm -rf fizz.dSYM

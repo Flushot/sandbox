@@ -1,11 +1,14 @@
 .DS_Store
+#*#
 *.o
 *.so
 *.log
 /*.lst
 /c/fizz
+/c/fizz.dSYM/
 /java/*.class
 /java/JFizz.h
-/net/fizz
+/net/fizz.exe
+/net/*.so
 /ruby/ext/Makefile
 /tmp

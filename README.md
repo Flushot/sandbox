@@ -7,8 +7,10 @@ Just screwing around.
 
   * nasm
   * gcc
-  * jdk
-  * mono
+  * jdk 1.6.x
+  * mono 1.x
+  * ruby 1.9.x
+  * python 2.x
 
 ## Building
 

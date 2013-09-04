@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
+#include <malloc/malloc.h>
 #include "../fizzy.h"
 
 /* Show CLI usage syntax and exit. */

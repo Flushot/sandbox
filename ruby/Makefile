@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -O0 -g -ansi
+CFLAGS = -Wall -O0 -g -ansi -m32
 
 all: fizz
 
@@ -13,5 +13,5 @@ test: all
 	time ./fizz 1 5
 
 clean:
-	$(MAKE) -C ext clean
+	[ -e ext/Makefile ] && $(MAKE) -C ext clean
 	rm -f ext/Makefile
