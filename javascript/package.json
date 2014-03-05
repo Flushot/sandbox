@@ -1,0 +1,13 @@
+{
+  "name": "fizz",
+  "version": "1.0.0",
+  "description": "javascript version of fizzbuzz",
+  "main": "fizz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Lyon <flushot@gmail.com",
+  "dependencies": {
+    "node-ffi": ">0.0.0"
+  }
+}

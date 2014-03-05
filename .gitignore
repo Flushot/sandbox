@@ -3,12 +3,15 @@
 *.o
 *.so
 *.log
+*.exe
 /*.lst
 /c/fizz
 /c/fizz.dSYM/
 /java/*.class
 /java/JFizz.h
+/java/*.dSYM/
 /net/fizz.exe
 /net/*.so
 /ruby/ext/Makefile
 /tmp
+/javascript/node_modules
