@@ -1,6 +1,2 @@
-#!/usr/bin/env php
-<?php
-
-echo("not implemented yet\n");
-
-?>
+#!/bin/sh
+php -d "extension=ext/modules/fizzy.so" fizz.php
